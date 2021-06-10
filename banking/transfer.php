@@ -1,16 +1,14 @@
 <?php  
     include "./php/init.php";
-    if(isset($_GET["number"])){
-        $accno = intval($_GET["number"]);
-        $res = mysqli_query($con, "SELECT * FROM customers WHERE account_number = $accno");
+    if(isset($_GET["to"]) && isset($_GET["from"])){
+        $to = intval($_GET["to"]);
+        $from = intval($_GET["from"]);
+        $res = mysqli_query($con, "SELECT * FROM customers WHERE account_number = $to");
         if(mysqli_num_rows($res) != 1){
             echo "<script> alert('error finding your account') ; window.location = './allCustomers.php' </script>";
         }else{
         
         $rows = mysqli_fetch_assoc($res);
-
-        $query ="SELECT account_number, name FROM customers WHERE account_number != $accno";
-        $rests = mysqli_query($con, $query);
 ?>
 
 
@@ -29,7 +27,7 @@
 
 <body style="background-image:linear-gradient(purple,blue)">
 
-<?php include "./templets/header.html" ?>
+<?php include "./templates/header.html" ?>
 
 
     <main>
@@ -37,17 +35,10 @@
             <form action="./php/transferlogic.php" method="POST">
                 <h3>Transfer Amount</h3>
 
-                <input type="hidden" name="myaccount" required value="<?php echo $accno;  ?>" id="">
+                <input type="hidden" name="myaccount" required value="<?php echo $from;  ?>" id="">
 
                 <div class="field">
-                    <label for="selectTo">To Account: </label>
-                    <select name="toAccountNumber" required id="selectTo">
-                    <?php 
-                        while($row = mysqli_fetch_assoc($rests)){
-                            echo '<option value="'.$row['account_number'].'">'.$row['account_number'].'('.$row['name'].')</option>';
-                        }
-                    ?>
-                    </select>
+                <input type="hidden" name="toaccount" id="toaccount" value="<?php echo $rows["account_number"];?>">
                 </div>
 
                 <div class="field">

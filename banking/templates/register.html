@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body style="background-image: linear-gradient(120deg, cyan,lightgreen,cyan);">
+    <main>
+        <div class="transfer-form">
+            <h1>Register</h1>
+            <form action="../php/registerController.php" method="post">
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Account Holder Name" />
+            </div>
+            <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" placeholder="E-mail ID" /> 
+            </div>
+            <div class="field">
+                <label for="phone">Mobile No.</label>
+                <input type="number" name="phone" id="phone" placeholder="Mobile Number" maxlength="10" minlength="10">
+            </div>
+            <div class="field">
+                <label for="Savings">Savings</label>
+                <input type="radio" name="atype" id="Savings" value="Savings">
+                <label for="Current">Current</label>
+                <input type="radio" name="atype" id="Current" value="Current">
+            </div>
+            <div class="field">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="addresss" placeholder="Address">
+            </div>
+            <div class="field">
+                <input type="submit" name="register" value="Register">
+            </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

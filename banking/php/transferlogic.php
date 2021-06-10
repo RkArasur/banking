@@ -2,25 +2,27 @@
 
 include "./init.php";
 
-if(isset($_POST["transfer"]) && isset($_POST["toAccountNumber"]) && isset($_POST["amount"]) && isset($_POST["myaccount"])){
 
-    $myaccnumber = $_POST["myaccount"];
-    $toaccno = $_POST["toAccountNumber"];
-    $amount = $_POST["amount"];
+if(isset($_POST["transfer"]) && isset($_POST["toaccount"]) && isset($_POST["message"]) && isset($_POST["amount"]) && isset($_POST["myaccount"])){
+
+    $myaccnumber = intval($_POST["myaccount"]);
+    $toaccno = intval($_POST["toaccount"]);
+    $amount = intval($_POST["amount"]);
     $message =$_POST["message"];
-
+    echo $myaccnumber;
+    echo $toaccno;
+    echo $amount;
+    echo $message;
     $res = mysqli_query($con, "SELECT * FROM customers WHERE account_number = $myaccnumber");
     $fromAccountDetails = mysqli_fetch_assoc($res);
 
     $res = mysqli_query($con, "SELECT * FROM customers WHERE account_number = $toaccno");
     $toAccountDetails = mysqli_fetch_assoc($res);
     if($amount <0){
-        echo "<script> alert('Enter valid amount') ; window.location = '../allCustomers.php' </script>";
+        echo "<script> alert('Enter valid amount') ; window.location = '../allCustomers.php?number=<?php echo $myaccnumber; ?>' </script>";
     }
-    else if($myaccnumber == $toaccno){
-        echo "<script> alert('You cannot transfet to self') ; window.location = '../allCustomers.php' </script>";
-    }else if($fromAccountDetails["cur_balance"] - $amount <0){
-        echo "<script> alert('Insufficient Balance') ; window.location = '../allCustomers.php' </script>";
+    else if($fromAccountDetails["cur_balance"] - $amount <0){
+        echo "<script> alert('Insufficient Balance') ; window.location = '../allCustomers.php?number=<?php echo $myaccnumber; ?>' </script>";
     }else{
         $fromNewBalance = $fromAccountDetails["cur_balance"] - $amount;
         $toNewBalance = $toAccountDetails["cur_balance"] + $amount;
@@ -34,7 +36,10 @@ if(isset($_POST["transfer"]) && isset($_POST["toAccountNumber"]) && isset($_POST
 
         echo mysqli_error($con);
 
-        echo "<script> alert('Transaction Successfull') ; window.location = '../allCustomers.php' </script>";
+        echo "<script> alert('Transaction Successfull') ; window.location = '../allCustomers.php?number=<?php echo $myaccnumber; ?>' </script>";
     }
 
+}else{
+    echo "NOT RIGHT";
 }
+?>

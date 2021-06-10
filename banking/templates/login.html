@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body style="background-image: linear-gradient(120deg, cyan,lightgreen,cyan);">
+    <main>
+        <div class="transfer-form">
+            <form method="POST" class="form1" action="../php/loginController.php">
+            <h1>Login</h1><br>
+            <div class="field">
+                <label for='usr'>Username</label><br>
+                <input type="text" placeholder="UserName" name='user'>
+            </div>
+            <div class="field">
+                <label for='pwd'>Password</label><br>
+                <input class='inp' type="password" placeholder="Phone No." name='pwd'>
+            </div>
+            <div class="field">
+                <input type="submit" id='btn' value='Login' name="login">
+            </div>
+        </form>
+        </div>
+    </main>
+</body>
+
+</html>

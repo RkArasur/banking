@@ -1,4 +1,3 @@
-
 <?php  
     include "./php/init.php";
     $accno = 0;
@@ -21,41 +20,40 @@
 <body style="background-image:linear-gradient(orange,red)">
 
 <?php include "./templates/header.html" ?>
-
-    
-    <main>
+<main>
         
         <div class="table table-success table-striped" style="background-image:linear-gradient(orange,red)">
             <table>
                 <thead>
-                    <tr><th colspan=3>Choose Account</th></tr>
+                    <tr><th colspan=4>Transactions</th></tr>
                     <tr>
-                        <th>Account Number</th>
-                        <th>Name</th>
-                        <th>select</th>
+                        <th>To Account</th>
+                        <th>Date</th>
+                        <th>message</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <?php 
 
-                        $query ="SELECT * FROM customers";
+                        $query ="SELECT * FROM transactions where from_account_no = $accno";
                         $res = mysqli_query($con, $query);
 
                         while($row = mysqli_fetch_assoc($res)){
-                            if($row["name"] != $_SESSION['username']){
                     ?>
 
                     <tr>
-                        <td><?php echo $row["account_number"] ?></td>
-                        <td><?php echo $row["name"] ?></td>
-                        <td><a href="./viewCustomer.php?number=<?php echo $row["account_number"]; ?>&from=<?php echo $accno; ?>" class="plain-btn">Transfer</a></td>
+                        <td><?php echo $row["to_account_no"] ?></td>
+                        <td><?php echo $row["date_time"] ?></td>
+                        <td><?php echo $row["message"] ?></td>
+                        <td><?php echo $row["amount_sent"] ?></td>
                     </tr>
                     <?php
-                            }}
+                            }
                             ?>
                     <tr>
-                        <td colspan=3><a href="./landing.php" class="transfet-page-btn">Go Back</a></td>
+                        <td colspan=4><a href="./landing.php" class="transfet-page-btn">Go Back</a></td>
                     </tr>
     
                 </tbody>
@@ -63,6 +61,6 @@
         </div>
 
     </main>
-
+    
 </body>
 </html>
